@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Sistema\Url\UrlController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['auth'], 'prefix' => '/'], function () {
+    Route::get('', [UrlController::class, 'index'])->name('index');
+    Route::get('lista', [UrlController::class, 'index'])->name('indexList');
+    Route::post('getList', [UrlController::class, 'getList'])->name('getList');
+    Route::post('urlRegister', [UrlController::class, 'store'])->name('urlRegister');
+    Route::post('urlEdit', [UrlController::class, 'edit'])->name('urlEdit');
+    Route::post('urlDelete', [UrlController::class, 'destroy'])->name('urlDelete');
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

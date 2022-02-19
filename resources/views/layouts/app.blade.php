@@ -9,8 +9,17 @@
 
     <title>{{ __('Projeto Wide Pay') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        if (typeof module === "object") {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        if (window.module) module = window.module;
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +27,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- css data-table -->
+    <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -76,6 +91,13 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        {{-- Includable Modals --}}
+        @yield('modals')
+
+        {{-- Includable JS --}}
+        @yield('scripts')
+
     </div>
 </body>
 </html>
