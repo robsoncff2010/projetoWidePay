@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/'], function () {
     Route::post('urlRegister', [UrlController::class, 'store'])->name('urlRegister');
     Route::post('urlEdit', [UrlController::class, 'edit'])->name('urlEdit');
     Route::post('urlDelete', [UrlController::class, 'destroy'])->name('urlDelete');
+    Route::post('urlDetail', [UrlController::class, 'getDetail'])->name('urlDetail');
 });
 
 Auth::routes();

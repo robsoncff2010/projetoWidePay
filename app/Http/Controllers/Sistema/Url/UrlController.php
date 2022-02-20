@@ -93,4 +93,23 @@ class UrlController extends Controller
                                     ]);
         }
     }
+
+    public function getDetail(Request $request)
+    {
+        try {
+            $data = new UrlService(new RegisterUrl());
+            $data = $data->detailUrl($request->id);
+
+            return Response()->json([
+                                        'result'   => true,
+                                        'httpBody' => $data,
+                                    ]);
+        } catch (\Exception $e) {
+
+            return Response()->json([
+                                      'result'  => false,
+                                      'message' => $e->getMessage(),
+                                    ]);
+        }
+    }
 }

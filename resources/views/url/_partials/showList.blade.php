@@ -16,7 +16,7 @@
                         <thead>
                         <tr>
                             <td>#</td>
-                            <td>user_id</td>
+                            <td>Usuário</td>
                             <td>url</td>
                             <td>http_status</td>
                             <td>http_body</td>

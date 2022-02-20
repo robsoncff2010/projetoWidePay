@@ -19,4 +19,9 @@ class RegisterUrl extends Authenticatable
     protected $fillable = ['id','user_id', 'url', 'http_status', 'http_body'];
 
     protected $primaryKey = "id";
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

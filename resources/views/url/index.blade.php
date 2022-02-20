@@ -12,6 +12,7 @@
         const URL_REGISTER = '{{ route('urlRegister', [ session()->get('users') ])}}';
         const URL_EDIT     = '{{ route('urlEdit', [ session()->get('users') ])}}';
         const URL_DELETE   = '{{ route('urlDelete', [ session()->get('users') ])}}';
+        const URL_DETAIL   = '{{ route('urlDetail', [ session()->get('users') ])}}';
     </script>
 
     <script src="{{ mix('js/url/index.js') }}"></script>
@@ -20,4 +21,5 @@
 @section('modals')
     @include('url.modals.newEditUrl')
     @include('url.modals.deleteUrl')
+    @include('url.modals.detailUrl')
 @endsection

@@ -27,7 +27,7 @@ $(document).ready(function(){
             {data: 'user_id'},
             {data: 'url'},
             {data: 'http_status'},
-            {data: 'http_body'},
+            {data: 'http_body', "bSortable": false},
             {data: 'action', "bSortable": false},
         ]
     })
@@ -65,7 +65,7 @@ $(document).ready(function(){
 
                 msg = 'Url foi editado com sucesso!';
 
-                ajaxUrl(URL_EDIT, formData, msg, 2); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+                ajaxUrl(URL_EDIT, formData, msg, 2); // 1 = cadastrar url, 2 = editar url, 3 = excluir url, 4 = detalhe body url
             }else
             {
                 formData = {
@@ -75,7 +75,7 @@ $(document).ready(function(){
 
                 msg = 'Url foi cadastrado com sucesso!';
 
-                ajaxUrl(URL_REGISTER, formData, msg, 1); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+                ajaxUrl(URL_REGISTER, formData, msg, 1); // 1 = cadastrar url, 2 = editar url, 3 = excluir url, 4 = detalhe body url
             }
 
             $('#modalUrlId').val('');
@@ -85,6 +85,17 @@ $(document).ready(function(){
             validateDefault();
             $('#inputUrl').addClass('is-invalid');
         }
+    })
+
+    $(document).on('click', '.detailBodyUrl', function(){
+        formData = {
+            _token : $("meta[name='csrf-token']").attr('content'),
+            id     : $(this)[0].dataset.idUrl,
+        };
+
+        msg = '';
+
+        ajaxUrl(URL_DETAIL, formData, msg, 4); // 1 = cadastrar url, 2 = editar url, 3 = excluir url, 4 = detalhe body url
     })
 
     $('#inputUrl').on('keyup', function(){
@@ -107,7 +118,7 @@ $(document).ready(function(){
 
         msg = 'Url foi excluído com sucesso!';
 
-        ajaxUrl(URL_DELETE, formData, msg, 3); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+        ajaxUrl(URL_DELETE, formData, msg, 3); // 1 = cadastrar url, 2 = editar url, 3 = excluir url, 4 = detalhe body url
     })
 
     function ajaxUrl(url, formData, msg, action)
@@ -125,15 +136,21 @@ $(document).ready(function(){
                         case 2:
                             $('#inputUrl').val('');
                             $('#modalNewEditUrl').modal('hide');
+
+                            tableUrl.ajax.reload();
+                            alert(msg);
                             break;
                         case 3:
                             $('#modalDeleteUrl').modal('hide');
+
+                            tableUrl.ajax.reload();
+                            alert(msg);
+                            break;
+                        case 4:
+                            $('.modalDetailUrlTextArea').val(response.httpBody);
+                            $('#modalDetailUrl').modal('show');
                             break;
                     }
-
-                    tableUrl.ajax.reload();
-
-                    alert(msg);
                 }else
                 {
                     alert('Aconteceu algum erro, tente novamente!');
@@ -147,7 +164,7 @@ $(document).ready(function(){
 
     function validateUrl(url)
     {
-        let regexUrl = new RegExp("^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}");
+        let regexUrl = new RegExp("^(http|https)?://");
 
         return regexUrl.test(url);
     }
