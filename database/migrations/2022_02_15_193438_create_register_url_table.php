@@ -18,9 +18,9 @@ class CreateRegisterUrlTable extends Migration
         Schema::create('register_url', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('url', 250);
+            $table->string('url');
             $table->integer('http_status')->nullable();
-            $table->string('http_body')->nullable();
+            $table->text('http_body')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

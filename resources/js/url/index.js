@@ -53,30 +53,50 @@ $(document).ready(function(){
     })
 
     $('#saveEditUrl').on('click', function(){
-        if($('#modalUrlId').val() != '')
+        if(validateUrl($('#inputUrl').val()))
         {
-            formData = {
-                _token : $("meta[name='csrf-token']").attr('content'),
-                id     : $('#modalUrlId').val(),
-                url    : $('#inputUrl').val(),
-            };
+            if($('#modalUrlId').val() != '')
+            {
+                formData = {
+                    _token : $("meta[name='csrf-token']").attr('content'),
+                    id     : $('#modalUrlId').val(),
+                    url    : $('#inputUrl').val(),
+                };
 
-            msg = 'Url foi editado com sucesso!';
+                msg = 'Url foi editado com sucesso!';
 
-            ajaxUrl(URL_EDIT, formData, msg, 2); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+                ajaxUrl(URL_EDIT, formData, msg, 2); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+            }else
+            {
+                formData = {
+                    _token : $("meta[name='csrf-token']").attr('content'),
+                    url    : $('#inputUrl').val(),
+                };
+
+                msg = 'Url foi cadastrado com sucesso!';
+
+                ajaxUrl(URL_REGISTER, formData, msg, 1); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+            }
+
+            $('#modalUrlId').val('');
+            validateDefault();
         }else
         {
-            formData = {
-                _token : $("meta[name='csrf-token']").attr('content'),
-                url    : $('#inputUrl').val(),
-            };
-
-            msg = 'Url foi cadastrado com sucesso!';
-
-            ajaxUrl(URL_REGISTER, formData, msg, 1); // 1 = cadastrar url, 2 = editar url, 3 = excluir url
+            validateDefault();
+            $('#inputUrl').addClass('is-invalid');
         }
+    })
 
-        $('#modalUrlId').val('');
+    $('#inputUrl').on('keyup', function(){
+        validateDefault();
+
+        if(validateUrl($('#inputUrl').val()))
+        {
+            $('#inputUrl').addClass('is-valid');
+        }else
+        {
+            $('#inputUrl').addClass('is-invalid');
+        }
     })
 
     $('#modalButtonDeleteUrl').on('click', function(){
@@ -123,5 +143,18 @@ $(document).ready(function(){
                 alert(msg);
             },
         });
+    }
+
+    function validateUrl(url)
+    {
+        let regexUrl = new RegExp("^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}");
+
+        return regexUrl.test(url);
+    }
+
+    function validateDefault()
+    {
+        $('#inputUrl').removeClass('is-valid');
+        $('#inputUrl').removeClass('is-invalid');
     }
 });

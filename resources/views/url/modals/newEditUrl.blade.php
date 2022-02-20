@@ -10,7 +10,8 @@
                 <label for="inputUrl" class="col-md-1 col-form-label">Url:</label>
                 <div class="col-md-11">
                     <input type="hidden" id="modalUrlId" value="">
-                    <input id="inputUrl" class="form-control" name="inputUrl" value="{{ old('inputUrl') }}" required placeholder="http://127.0.0.1:8000/exemplo" autofocus>
+                    <input id="inputUrl" class="form-control" name="inputUrl" value="{{ old('inputUrl') }}" placeholder="http://127.0.0.1:8000/exemplo" autofocus>
+                    <div class="invalid-feedback">url inválido</div>
                 </div>
             </div>
         </div>
