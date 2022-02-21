@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'widepay'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9C4A31A449CE4D48980CCBE696C10F55 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5BD762D94C7A476F94CD0CE3C40290FC }}
           package: .
