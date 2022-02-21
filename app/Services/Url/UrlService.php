@@ -38,7 +38,6 @@ class UrlService
         }
 
         $queryRegisterUrl = $this->registerUrlModal->query()
-                                                   ->where('user_id', 1)
                                                    ->with('user');
 
         $queryRegisterUrl->orderBy($order, $sort);
