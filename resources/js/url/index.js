@@ -174,4 +174,10 @@ $(document).ready(function(){
         $('#inputUrl').removeClass('is-valid');
         $('#inputUrl').removeClass('is-invalid');
     }
+
+    $(document).ready(function () {
+        setInterval(function () {
+            tableUrl.ajax.reload();
+        }, 15000); //15 em 15 segundos
+    });
 });

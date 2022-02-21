@@ -18,8 +18,8 @@
                             <td>#</td>
                             <td>Usuário</td>
                             <td>url</td>
-                            <td>http_status</td>
-                            <td>http_body</td>
+                            <td>Http Status</td>
+                            <td>Http Body</td>
                             <td>Ações</td>
                         </tr>
                         </thead>
