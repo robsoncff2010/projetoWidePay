@@ -36,6 +36,9 @@ $(document).ready(function(){
         $('#modalNewEditUrlTitle').text('Cadastro de Url');
         $('#inputUrl').val('');
         $('#modalUrlId').val('');
+
+        validateDefault();
+
         $('#modalNewEditUrl').modal('show');
     })
 
@@ -43,6 +46,9 @@ $(document).ready(function(){
         $('#modalNewEditUrlTitle').text('Edição de Url');
         $('#inputUrl').val($(this)[0].dataset.idUrlText);
         $('#modalUrlId').val($(this)[0].dataset.idUrl);
+
+        validateDefault();
+
         $('#modalNewEditUrl').modal('show');
     })
 
@@ -131,7 +137,7 @@ $(document).ready(function(){
             success: function success(response) {
                 if(response.result == true)
                 {
-                    switch (action) {
+                    switch (action) { // 1 = cadastrar url, 2 = editar url, 3 = excluir url, 4 = detalhe body url
                         case 1:
                         case 2:
                             $('#inputUrl').val('');
